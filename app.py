@@ -30,7 +30,7 @@ def win_second(line1, line2, line3):
             (line1[1] == line2[1] == line3[1] == ['0']) or
         (line1[2] == line2[2] == line3[2] == ['0']) or
         (line1[0] == line2[1] == line3[2] == ['0']) or
-            (line1[2] == line2[1] == line3[0] == ['0'])) ==1:
+            (line1[2] == line2[1] == line3[0] == ['0'])) == 1:
         flag = 1
     return flag
 

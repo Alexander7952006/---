@@ -1,15 +1,16 @@
-"""Следующие 3 строки - переменные для строк поля(с 1 по 3 строку)"""
+print('''Это игра крестики-нолики. Первый игрок играет за крестики,
+a второй за нолики.''')
 line1 = [[' '], [' '], [' ']]
 line2 = [[' '], [' '], [' ']]
 line3 = [[' '], [' '], [' ']]
-line_list = [line1, line2, line3] #список для удобной нумерации линий
-"""Следующие 3 строки - вывод поля для игры"""
+line_list = [line1, line2, line3] 
 print(line1)
 print(line2)
 print(line3)
 
 
 def win_first(line1, line2, line3):
+    """Ф-ция перебирает все варианты победы первого игрока"""
     flag = 0
     if (line1 == [['×'], ['×'], ['×']] or line2 == [['×'], ['×'], ['×']] or
         line3 == [['×'], ['×'], ['×']] or
@@ -23,6 +24,7 @@ def win_first(line1, line2, line3):
 
 
 def win_second(line1, line2, line3):
+    """Ф-ция перебирает все варианты победы второго игрока"""
     flag = 0
     if (line1 == [['0'], ['0'],['0']] or line2 == [['0'], ['0'], ['0']] or
             line3 == [['0'], ['0'], ['0']] or
@@ -36,6 +38,7 @@ def win_second(line1, line2, line3):
 
 
 def end(line1, line2, line3):
+    """Ф-ция перебирает все варианты окончания партии"""
     flag = 0
     if (line1[0] == line2[0] == line3[0] != [' '] or 
         line1[1] == line2[1] == line3[1] != [' '] or 
@@ -48,23 +51,17 @@ def end(line1, line2, line3):
         line1.count([' ']) + line2.count([' ']) + line3.count([' ']) == 0):
         flag = 1
     return flag       
-count = 0 #счетчик четности хода(четное-первый игрок, нечетное - второй)
+count = 0 
 
 
 while end(line1, line2, line3) != 1:
-    if count%2 == 0:
+    if count % 2 == 0:
         player = 'Первый игрок'
     else:
         player = 'Второй игрок'
-    argument = 0 #переменная для проверки того, сделан ли ход игроком
-    '''Цикл while работает до тех пор пока игрок не сделает ход'''
+    argument = 0
     while argument != 1:
-        '''arg_move - переменная для проверки корректности данных,
-    введенных первым игроком'''
         arg_move = 0 
-        '''Цикл while работает до тех пор пока игрок не введет подходящие
-        значения(целое число от 1 до 3 вкл), это нужно для того чтобы потом
-        программа не прекращалась из-за ошибки'''
         while arg_move != 1:
             move_line = input(f"{player}, введите номер строки, на" + '\n' +
                               'которой хотите поставить знак '
@@ -74,30 +71,27 @@ while end(line1, line2, line3) != 1:
                                '(целое число от 1 до 3): \n')
             if (move_line in ['1', '2', '3'] and move_column in
                 ['1', '2', '3']):
-                arg_move = 1 #данные удовл. условиям, присваиваем 1
-                move_line = int(move_line) #перевод в int для индексации
-                move_column = int(move_column) #перевод в int для индексации
+                arg_move = 1 
+                move_line = int(move_line) 
+                move_column = int(move_column) 
             else:
                 print('Ошибка, введите целое число от 1 до 3 вкл \n')
-        '''Если клетка, запрошенная игроком пуста, присвоим
-        ей нужное значение'''
-        if count%2==0:
+        if count % 2 == 0:
             if line_list[move_line-1][move_column-1] == [' ']:
                 line_list[move_line-1][move_column-1] = ['×']
-                argument = 1 #ход сделан успешно, присваиваем единицу
-                count += 1 #ход сделан успешно, присваиваем единицу
+                argument = 1
+                count += 1
             else:
                 print('На этой клетке уже стоит знак, поставьте знак '
                       'на пустую клетку \n')
         else:
             if line_list[move_line-1][move_column-1] == [' ']:
                 line_list[move_line-1][move_column-1] = ['0']
-                argument = 1#ход сделан успешно, присваиваем единицу
-                count += 1 #ход сделан успешно, присваиваем единицу
+                argument = 1
+                count += 1 
             else:
                 print('На этой клетке уже стоит знак, поставьте знак '
                       'на пустую клетку \n')
-    '''Вывод игрового поля'''
     print(line1)
     print(line2)
     print(line3)
